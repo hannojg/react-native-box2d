@@ -1,11 +1,11 @@
 #include "FastCryptoHostObject.h"
 #include <jsi/jsi.h>
 
-#include <box2d/box2d/b2_math.h>
-#include <box2d/box2d/b2_world.h>
-#include <box2d/box2d/b2_body.h>
-#include <box2d/box2d/b2_polygon_shape.h>
-#include <box2d/box2d/b2_fixture.h>
+#include <box2d/b2_math.h>
+#include <box2d/b2_world.h>
+#include <box2d/b2_body.h>
+#include <box2d/b2_polygon_shape.h>
+#include <box2d/b2_fixture.h>
 #include <android/log.h>
 
 namespace margelo {

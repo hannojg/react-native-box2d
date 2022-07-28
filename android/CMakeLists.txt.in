@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 2.8.2)
+project(box2d-download NONE)
+
+include(ExternalProject)
+ExternalProject_Add(box2d
+    GIT_REPOSITORY    https://github.com/erincatto/box2d.git
+    GIT_TAG           main
+    SOURCE_DIR        "${CMAKE_BINARY_DIR}/box2d-src"
+    BINARY_DIR        "${CMAKE_BINARY_DIR}/box2d-build"
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND     ""
+    INSTALL_COMMAND   ""
+    TEST_COMMAND      ""
+)

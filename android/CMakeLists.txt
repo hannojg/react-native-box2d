@@ -57,10 +57,57 @@ else()
         )
 endif()
 
+#### region: add box2d to build
+## TODO: when shipping this as lib, i need to fix this. One cheap possibility would be
+##       to copy over the box2d dir and literally ship it with the code.
+## https://developer.android.com/static/studio/projects/configure-cmake#include-other-cmake-projects
+## Sets lib_src_DIR to the path of the target CMake project.
+#set( lib_src_DIR ../externals/box2d/src )
+#
+## Sets lib_build_DIR to the path of the desired output directory.
+#set( lib_build_DIR ../externals/box2d/build )
+#file(MAKE_DIRECTORY ${lib_build_DIR})
+#
+## Adds the CMakeLists.txt file located in the specified directory
+## as a build dependency.
+#add_subdirectory( # Specifies the directory of the CMakeLists.txt file.
+#        ${lib_src_DIR}
+#
+#        # Specifies the directory for the build outputs.
+#        ${lib_build_DIR} )
+#
+## Adds the output of the additional CMake build as a prebuilt static
+## library and names it libbox2d.
+#add_library( libbox2d STATIC IMPORTED )
+#set_target_properties( libbox2d PROPERTIES IMPORTED_LOCATION
+#        ${lib_build_DIR}/${ANDROID_ABI}/libbox2d.a )
+#include_directories( ${lib_src_DIR}/include )
+#### endregion
+
+if (CMAKE_VERSION VERSION_LESS 3.2)
+        set(UPDATE_DISCONNECTED_IF_AVAILABLE "")
+else()
+        set(UPDATE_DISCONNECTED_IF_AVAILABLE "UPDATE_DISCONNECTED 1")
+endif()
+
+include(../scripts/DownloadProject.cmake)
+download_project(PROJ       box2d
+        GIT_REPOSITORY      https://github.com/hannojg/box2d.git
+        GIT_TAG             main
+        ${UPDATE_DISCONNECTED_IF_AVAILABLE}
+        # TODO: make this work and use original repo
+        CMAKE_ARGS          -DBOX2D_BUILD_TESTBED=OFF
+        )
+
+add_subdirectory(${box2d_SOURCE_DIR} ${box2d_BINARY_DIR})
+include_directories("${box2d_SOURCE_DIR}/include")
+
+
 target_link_libraries(
         reactnativefastcrypto
         ${log-lib}
         ${JSI_LIB}
         ${REACT_NATIVE_JNI_LIB}
         android
+        box2d
 )
