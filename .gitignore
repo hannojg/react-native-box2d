@@ -147,3 +147,7 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+
+# Externals
+libs
+cpp/box2d/
