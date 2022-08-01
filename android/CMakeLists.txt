@@ -20,7 +20,6 @@ endif()
 add_library(reactnativefastcrypto  # <-- Library name
         SHARED
         "src/main/cpp/cpp-adapter.cpp"
-        "../cpp/FastCryptoHostObject.cpp"
         "../cpp/JSI Utils/TypedArray.cpp"
         "../cpp/jsi/JsiHostObject.cpp"
         ${INCLUDE_JSI_CPP} # only on older RN versions
