@@ -9,9 +9,9 @@ export default function App() {
     const world = Box2d.b2World(b2vec2);
 
     // create ground
-    // const groundBodyDef = B2.b2BodyDef();
-    // groundBodyDef.position = B2.b2Vec2(0, -10);
-    // const groundBody = world.current.CreateBody(groundBodyDef);
+    const groundBodyDef = Box2d.b2BodyDef();
+    groundBodyDef.position = Box2d.b2Vec2(0, -10);
+    const groundBody = world.CreateBody(groundBodyDef);
     // // ground polygon
     // const groundBox = B2.b2PolygonShape();
     // groundBox.SetAsBox(50, 10);
@@ -45,7 +45,7 @@ export default function App() {
     //   console.log(`x: ${position.x}, y: ${position.y}, rotation: ${rotation}`);
     // }
 
-    console.log({ b2vec2, world });
+    console.log({ b2vec2, world, groundBody });
   }, []);
 
   return (
