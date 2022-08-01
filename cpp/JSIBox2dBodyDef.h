@@ -28,6 +28,9 @@ namespace Box2d {
                 jsi::detail::throwJSError(runtime, "Parameter was not recognized as b2vec2.");
             }
         }
+        JSI_PROPERTY_SET(angle) {
+            getObject()->angle = value.asNumber();
+        }
         JSI_PROPERTY_SET(type) {
             auto typeNum = value.asNumber();
             if (typeNum == 0) {
@@ -43,6 +46,7 @@ namespace Box2d {
 
         JSI_EXPORT_PROPERTY_SETTERS(JSI_EXPORT_PROP_SET(JSIBox2dBodyDef, position),
                                     JSI_EXPORT_PROP_SET(JSIBox2dBodyDef, type),
+                                    JSI_EXPORT_PROP_SET(JSIBox2dBodyDef, angle),
         );
 
         /**

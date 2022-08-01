@@ -4542,6 +4542,11 @@ react-native-reanimated@^2.9.1:
     setimmediate "^1.0.5"
     string-hash-64 "^1.0.3"
 
+react-native-static-safe-area-insets@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-static-safe-area-insets/-/react-native-static-safe-area-insets-2.1.2.tgz#4a45cc47c62a8a1eac4ac2783c2ecc34e56dc3c1"
+  integrity sha512-cFbpK1tbxx9qwzu7C80JSkbIpDxLXuOyqozigShh8nGr6fxruBm9AwLBd0597Hv6NRAC04UPB2NVUrWL6Mkfmw==
+
 react-native@^0.66.0:
   version "0.66.0"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.66.0.tgz#99bdd83a9a612a71b94242767989d666d445b007"
