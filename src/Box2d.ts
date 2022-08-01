@@ -3,11 +3,16 @@ import { NativeModules, Platform } from 'react-native';
 // global func declaration for JSI functions
 declare global {
   function nativeCallSyncHook(): unknown;
-  var __FastCryptoProxy: object | undefined;
+
+  var Box2dApi:
+    | undefined
+    | {
+        b2World: () => object;
+      };
 }
 
 // Check if the constructor exists. If not, try installing the JSI bindings.
-if (global.__FastCryptoProxy == null) {
+if (global.Box2dApi == null) {
   // Get the native FastCrypto ReactModule
   const FastCryptoModule = NativeModules.FastCrypto;
   if (FastCryptoModule == null) {
@@ -55,10 +60,10 @@ if (global.__FastCryptoProxy == null) {
     );
 
   // Check again if the constructor now exists. If not, throw an error.
-  if (global.__FastCryptoProxy == null)
+  if (global.Box2dApi == null)
     throw new Error(
       'Failed to install react-native-fast-crypto, the native initializer function does not exist. Are you trying to use FastCrypto from different JS Runtimes?'
     );
 }
 
-export const FastCrypto = global.__FastCryptoProxy;
+export const Box2d = global.Box2dApi;

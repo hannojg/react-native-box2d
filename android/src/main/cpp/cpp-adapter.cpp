@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <jsi/jsi.h>
 #include "FastCryptoHostObject.h"
+#include "JSIBox2dApi.h"
 
 using namespace facebook;
 
@@ -8,6 +9,11 @@ void install(jsi::Runtime& runtime) {
     auto hostObject = std::make_shared<margelo::FastCryptoHostObject>();
     auto object = jsi::Object::createFromHostObject(runtime, hostObject);
     runtime.global().setProperty(runtime, "__FastCryptoProxy", std::move(object));
+
+    // add box2d api
+    auto box2dApi = std::make_shared<Box2d::JSIBox2dApi>(runtime);
+    auto box2dApiHostObject = jsi::Object::createFromHostObject(runtime, box2dApi);
+    runtime.global().setProperty(runtime, "Box2dApi", std::move(box2dApiHostObject));
 }
 
 extern "C"

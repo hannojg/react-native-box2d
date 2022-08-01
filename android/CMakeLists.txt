@@ -22,6 +22,7 @@ add_library(reactnativefastcrypto  # <-- Library name
         "src/main/cpp/cpp-adapter.cpp"
         "../cpp/FastCryptoHostObject.cpp"
         "../cpp/JSI Utils/TypedArray.cpp"
+        "../cpp/jsi/JsiHostObject.cpp"
         ${INCLUDE_JSI_CPP} # only on older RN versions
 )
 
@@ -62,7 +63,9 @@ target_include_directories(
         reactnativefastcrypto
         PRIVATE
 
-        cpp/box2d/include/
+        ../cpp/
+        ../cpp/jsi
+        ../cpp/box2d/include/
 )
 
 set (BOX2D_LIB "box2d")

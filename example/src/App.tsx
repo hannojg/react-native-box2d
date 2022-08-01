@@ -1,23 +1,17 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { FastCrypto } from 'react-native-fast-crypto';
-
-// Uncomment to run benchmark
-// import { benchmarkAgainstOldCrypto } from './Benchmarks';
-// setTimeout(async () => {
-//   await benchmarkAgainstOldCrypto();
-// }, 5000);
+import { Box2d } from 'react-native-fast-crypto';
 
 export default function App() {
+  React.useEffect(() => {
+    const world = Box2d.b2World();
+    console.log({ world });
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>
-        Hello!{' '}
-        {FastCrypto == null
-          ? 'FastCrypto is null :('
-          : 'FastCrypto is installed!'}
-      </Text>
+      <Text>{Box2d == null ? 'Box2d is null :(' : 'Box2d is installed!'}</Text>
     </View>
   );
 }
