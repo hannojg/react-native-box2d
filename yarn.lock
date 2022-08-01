@@ -1538,6 +1538,11 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@types/box2d@^0.0.35":
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/@types/box2d/-/box2d-0.0.35.tgz#38a5b2a94c8b1a6a2ca97117b166914b07be040f"
+  integrity sha512-x02dWo2WYV+TjyyCDfmqYzO5ItyBnc+5QJoGCvk+Dx4cj6BRjrJVa94shVRtfMYPYg015DhDNCpC6DWRSNmn4Q==
+
 "@types/cacheable-request@^6.0.1":
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/@types/cacheable-request/-/cacheable-request-6.0.2.tgz#c324da0197de0a98a2312156536ae262429ff6b9"

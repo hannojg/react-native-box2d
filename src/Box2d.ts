@@ -7,8 +7,8 @@ declare global {
   var Box2dApi:
     | undefined
     | {
-        b2Vec2: (xIn: number, yIn: number) => object;
-        b2World: (b2Vec2: object) => object;
+        b2Vec2: (xIn: number, yIn: number) => Box2D.Common.Math.b2Vec2;
+        b2World: (b2Vec2: Box2D.Common.Math.b2Vec2) => Box2D.Dynamics.b2World;
       };
 }
 
