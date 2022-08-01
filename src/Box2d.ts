@@ -10,6 +10,8 @@ declare global {
         b2Vec2: (xIn: number, yIn: number) => Box2D.Common.Math.b2Vec2;
         b2World: (b2Vec2: Box2D.Common.Math.b2Vec2) => Box2D.Dynamics.b2World;
         b2BodyDef: () => Box2D.Dynamics.b2BodyDef;
+        b2PolygonShape: () => Box2D.Collision.Shapes.b2PolygonShape;
+        b2FixtureDef: () => Box2D.Dynamics.b2FixtureDef;
       };
 }
 

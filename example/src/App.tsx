@@ -12,26 +12,26 @@ export default function App() {
     const groundBodyDef = Box2d.b2BodyDef();
     groundBodyDef.position = Box2d.b2Vec2(0, -10);
     const groundBody = world.CreateBody(groundBodyDef);
-    // // ground polygon
-    // const groundBox = B2.b2PolygonShape();
-    // groundBox.SetAsBox(50, 10);
-    // groundBody.CreateFixture(groundBox, 0);
+    // ground polygon
+    const groundBox = Box2d.b2PolygonShape();
+    groundBox.SetAsBox(50, 10);
+    groundBody.CreateFixture2(groundBox, 0);
 
-    // // create a dynamic body
-    // const bodyDef = B2.b2BodyDef();
-    // bodyDef.type = 2;
-    // bodyDef.position = B2.b2Vec2(0, 4);
-    // const body = world.current.CreateBody(bodyDef);
-    // // attach
-    // const dynamicBox = B2.b2PolygonShape();
-    // dynamicBox.SetAsBox(1, 1);
-    // // fixture
-    // const fixtureDef = B2.b2FixtureDef();
-    // fixtureDef.shape = dynamicBox;
-    // fixtureDef.density = 1;
-    // fixtureDef.friction = 0.3;
+    // create a dynamic body
+    const bodyDef = Box2d.b2BodyDef();
+    bodyDef.type = 2;
+    bodyDef.position = Box2d.b2Vec2(0, 4);
+    const body = world.CreateBody(bodyDef);
+    // attach
+    const dynamicBox = Box2d.b2PolygonShape();
+    dynamicBox.SetAsBox(1, 1);
+    // fixture
+    const fixtureDef = Box2d.b2FixtureDef();
+    fixtureDef.shape = dynamicBox;
+    fixtureDef.density = 1;
+    fixtureDef.friction = 0.3;
 
-    // body.CreateFixture(fixtureDef);
+    body.CreateFixture(fixtureDef);
 
     // // Start 🙌
     // const timeStep = 1 / 60;
