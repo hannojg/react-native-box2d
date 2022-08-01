@@ -5,6 +5,8 @@
 #pragma once
 
 #include <box2d/b2_world.h>
+#include "JSIBox2dVec2.h"
+
 #include <jsi/jsi.h>
 #include "jsi/JsiHostObject.h"
 
@@ -20,8 +22,8 @@ namespace Box2d {
         static const jsi::HostFunctionType
         createCtor() {
             return JSI_HOST_FUNCTION_LAMBDA {
-//                auto gravity = JsiB2Vec2::fromValue(runtime, arguments[0]);
-                b2World world = { {0, -10} };
+                auto gravity = JSIBox2dVec2::fromValue(runtime, arguments[0]);
+                b2World world = { *gravity };
 
                 return jsi::Object::createFromHostObject(
                         runtime,

@@ -7,7 +7,8 @@ declare global {
   var Box2dApi:
     | undefined
     | {
-        b2World: () => object;
+        b2Vec2: (xIn: number, yIn: number) => object;
+        b2World: (b2Vec2: object) => object;
       };
 }
 

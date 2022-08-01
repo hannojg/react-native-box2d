@@ -6,6 +6,7 @@
 
 #include "jsi/JsiHostObject.h"
 
+#include "JSIBox2dVec2.h"
 #include "JSIBox2dWorld.h"
 
 namespace Box2d {
@@ -14,6 +15,7 @@ namespace Box2d {
     class JSIBox2dApi: public RNJsi::JsiHostObject {
     public:
         JSIBox2dApi(jsi::Runtime &runtime) {
+            installFunction("b2Vec2", JSIBox2dVec2::createCtor());
             installFunction("b2World", JSIBox2dWorld::createCtor());
         }
     };

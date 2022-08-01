@@ -5,8 +5,10 @@ import { Box2d } from 'react-native-fast-crypto';
 
 export default function App() {
   React.useEffect(() => {
-    const world = Box2d.b2World();
-    console.log({ world });
+    const b2vec2 = Box2d.b2Vec2(0, -10);
+    const world = Box2d.b2World(b2vec2);
+
+    console.log({ b2vec2, world });
   }, []);
 
   return (
