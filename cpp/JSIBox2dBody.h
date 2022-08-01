@@ -17,14 +17,13 @@
 namespace Box2d {
     using namespace facebook;
 
-// NOTE: i couldn't use this with a shared_ptr because the object has no public constructor.
     class JSIBox2dBody : public JsiWrappingHostObject<b2Body *> {
     public:
         /**
          * Constructor
          */
         JSIBox2dBody(b2Body *body)
-                : JsiWrappingHostObject<b2Body *>(std::move(body)) {}
+                : JsiWrappingHostObject<b2Body *>(body) {}
 
         JSI_HOST_FUNCTION(GetPosition) {
             return JSIBox2dVec2::toValue(runtime, getObject()->GetPosition());

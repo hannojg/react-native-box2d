@@ -1,9 +1,11 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { Box2d } from 'react-native-fast-crypto';
 
 export default function App() {
+  const [v, setV] = React.useState<number>();
+
   // Reproduction from: https://box2d.org/documentation/md__d_1__git_hub_box2d_docs_hello.html
   React.useEffect(() => {
     const b2vec2 = Box2d.b2Vec2(0, -10);
@@ -13,6 +15,7 @@ export default function App() {
     const groundBodyDef = Box2d.b2BodyDef();
     groundBodyDef.position = Box2d.b2Vec2(0, -10);
     const groundBody = world.CreateBody(groundBodyDef);
+
     // ground polygon
     const groundBox = Box2d.b2PolygonShape();
     groundBox.SetAsBox(50, 10);
@@ -49,11 +52,12 @@ export default function App() {
         )}, rotation: ${rotation.toFixed(2)}`
       );
     }
-  }, []);
+  }, [v]);
 
   return (
     <View style={styles.container}>
       <Text>{Box2d == null ? 'Box2d is null :(' : 'Box2d is installed!'}</Text>
+      <Button title="Re-run useEffect" onPress={() => setV(Date.now())} />
     </View>
   );
 }

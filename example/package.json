@@ -13,8 +13,10 @@
     "bootstrap": "yarn && cd ios && bundle install && bundle exec pod install"
   },
   "dependencies": {
+    "@shopify/react-native-skia": "^0.1.137",
     "react": "^17.0.2",
-    "react-native": "^0.66.0"
+    "react-native": "^0.66.0",
+    "react-native-reanimated": "^2.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
