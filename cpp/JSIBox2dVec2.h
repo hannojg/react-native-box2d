@@ -13,7 +13,7 @@ namespace Box2d {
     using namespace facebook;
     using namespace RNJsi;
 
-class JSIBox2dVec2: public JsiSkWrappingSharedPtrHostObject<b2Vec2> {
+class JSIBox2dVec2: public JsiWrappingSharedPtrHostObject<b2Vec2> {
     public:
         JSI_PROPERTY_GET(x) { return static_cast<double>(getObject()->x); }
         JSI_PROPERTY_GET(y) { return static_cast<double>(getObject()->y); }
@@ -26,7 +26,7 @@ class JSIBox2dVec2: public JsiSkWrappingSharedPtrHostObject<b2Vec2> {
          * Constructor
          */
          JSIBox2dVec2(const b2Vec2 &vec)
-            : JsiSkWrappingSharedPtrHostObject<b2Vec2>(std::make_shared<b2Vec2>(vec)){}
+            : JsiWrappingSharedPtrHostObject<b2Vec2>(std::make_shared<b2Vec2>(std::move(vec))){}
 
          /**
          * Returns the underlying object from a host object of this type

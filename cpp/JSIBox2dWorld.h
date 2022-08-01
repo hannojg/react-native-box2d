@@ -13,11 +13,10 @@
 namespace Box2d {
     using namespace facebook;
 
-    class JSIBox2dWorld: public RNJsi::JsiHostObject {
+    class JSIBox2dWorld: public JsiWrappingSharedPtrHostObject<b2World> {
     public:
-        JSIBox2dWorld(const b2World &world) {
-
-        }
+        JSIBox2dWorld(const b2World &world):
+                JsiWrappingSharedPtrHostObject<b2World>(std::make_shared<b2World>(std::move(world))) {}
 
         static const jsi::HostFunctionType
         createCtor() {

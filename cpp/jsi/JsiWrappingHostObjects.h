@@ -36,9 +36,9 @@ private:
 };
 
 template <typename T>
-class JsiSkWrappingSharedPtrHostObject
+class JsiWrappingSharedPtrHostObject
         : public JsiWrappingHostObject<std::shared_ptr<T>> {
 public:
-    JsiSkWrappingSharedPtrHostObject(std::shared_ptr<T> object)
+    JsiWrappingSharedPtrHostObject(std::shared_ptr<T> object)
             : JsiWrappingHostObject<std::shared_ptr<T>>(std::move(object)) {}
 };
