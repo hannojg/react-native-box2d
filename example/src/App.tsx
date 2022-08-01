@@ -4,6 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Box2d } from 'react-native-fast-crypto';
 
 export default function App() {
+  // Reproduction from: https://box2d.org/documentation/md__d_1__git_hub_box2d_docs_hello.html
   React.useEffect(() => {
     const b2vec2 = Box2d.b2Vec2(0, -10);
     const world = Box2d.b2World(b2vec2);
@@ -33,19 +34,21 @@ export default function App() {
 
     body.CreateFixture(fixtureDef);
 
-    // // Start 🙌
-    // const timeStep = 1 / 60;
-    // const velocityIterations = 6;
-    // const positionIterations = 2;
+    // Start 🙌
+    const timeStep = 1 / 60;
+    const velocityIterations = 6;
+    const positionIterations = 2;
 
-    // world.Step(timeStep, velocityIterations, positionIterations);
-    // for (let i = 0; i < 120 * 10; i++) {
-    //   const position = body.GetPosition();
-    //   const rotation = body.GetAngle();
-    //   console.log(`x: ${position.x}, y: ${position.y}, rotation: ${rotation}`);
-    // }
-
-    console.log({ b2vec2, world, groundBody });
+    for (let i = 0; i < 60; i++) {
+      world.Step(timeStep, velocityIterations, positionIterations);
+      const position = body.GetPosition();
+      const rotation = body.GetAngle();
+      console.log(
+        `#${i} - x: ${position.x.toFixed(2)}, y: ${position.y.toFixed(
+          2
+        )}, rotation: ${rotation.toFixed(2)}`
+      );
+    }
   }, []);
 
   return (

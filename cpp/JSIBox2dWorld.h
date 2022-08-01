@@ -25,7 +25,17 @@ namespace Box2d {
             );
         }
 
-        JSI_EXPORT_FUNCTIONS(JSI_EXPORT_FUNC(JSIBox2dWorld, CreateBody))
+        JSI_HOST_FUNCTION(Step) {
+            getObject()->Step(
+                    arguments[0].asNumber(),
+                    arguments[1].asNumber(),
+                    arguments[2].asNumber()
+            );
+            return jsi::Value::undefined();
+        }
+
+        JSI_EXPORT_FUNCTIONS(JSI_EXPORT_FUNC(JSIBox2dWorld, CreateBody),
+                             JSI_EXPORT_FUNC(JSIBox2dWorld, Step))
 
         JSIBox2dWorld(const b2World &world):
                 JsiWrappingSharedPtrHostObject<b2World>(std::make_shared<b2World>(std::move(world))) {}
