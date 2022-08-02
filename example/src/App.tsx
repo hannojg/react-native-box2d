@@ -3,12 +3,13 @@ import * as React from 'react';
 import { StyleSheet, Dimensions, StatusBar, Platform } from 'react-native';
 import { Box2d } from 'react-native-fast-crypto';
 import {
+  Skia,
   Canvas,
   Group,
   Rect,
   useClockValue,
-  useComputedValue,
   useValue,
+  useComputedValue,
 } from '@shopify/react-native-skia';
 import StaticSafeAreaInsets from 'react-native-static-safe-area-insets';
 
@@ -30,27 +31,35 @@ const pxToMmFactor = meterPerScreenWidth / screenWidth;
 
 const boxSizeMm = 1;
 const boxSizePx = boxSizeMm * mmToPxFactor;
-const boxAngle = 45;
 
 const degreeToRadFactor = Math.PI / 180;
+const boxStartAngle = 25 * degreeToRadFactor;
 
 export default function App() {
-  const [v, setV] = React.useState<number>();
   const clock = useClockValue();
 
   const boxWorldPos = useValue({
     y: 4,
     x: meterPerScreenWidth / 2 - boxSizeMm / 2,
-    angle: boxAngle * degreeToRadFactor,
+    angle: boxStartAngle,
   });
-  const boxX = useComputedValue(
-    () => boxWorldPos.current.x * mmToPxFactor,
-    [boxWorldPos]
-  );
-  const boxY = useComputedValue(
-    () => boxWorldPos.current.y * mmToPxFactor,
-    [boxWorldPos]
-  );
+
+  const boxMatrix = useComputedValue(() => {
+    const matrix = Skia.Matrix();
+
+    // important, translate first
+    matrix.translate(
+      boxWorldPos.current.x * mmToPxFactor,
+      boxWorldPos.current.y * mmToPxFactor
+    );
+
+    // "Transform origin effect" set to center of box
+    matrix.translate(boxSizePx / 2, boxSizePx / 2);
+    matrix.rotate(boxWorldPos.current.angle);
+    matrix.translate(-(boxSizePx / 2), -(boxSizePx / 2));
+
+    return matrix;
+  }, [boxWorldPos]);
 
   // Reproduction from: https://box2d.org/documentation/md__d_1__git_hub_box2d_docs_hello.html
   React.useEffect(() => {
@@ -78,7 +87,8 @@ export default function App() {
       boxWorldPos.current.x,
       boxWorldPos.current.y
     );
-    // TODO: bodyDef.angle = boxWorldPos.current.angle;
+    bodyDef.angle = boxWorldPos.current.angle;
+
     const body = world.CreateBody(bodyDef);
     // attach
     const dynamicBox = Box2d.b2PolygonShape();
@@ -105,39 +115,22 @@ export default function App() {
         angle: body.GetAngle(),
       };
       // console.log(
-      //   `x: ${boxWorldPos.current.position.x.toFixed(
+      //   `x: ${boxWorldPos.current.x.toFixed(
       //     2
-      //   )}, y: ${boxWorldPos.current.position.y.toFixed(
+      //   )}, y: ${boxWorldPos.current.y.toFixed(
       //     2
       //   )}, rotation: ${boxWorldPos.current.angle.toFixed(2)}`
       // );
     });
     clock.start();
     return remove;
-  }, [boxWorldPos, clock, v]);
+  }, [boxWorldPos, clock]);
 
   return (
     <Canvas style={styles.container}>
       {/* Dynamic box */}
-      <Group
-      // TODO: rotation?
-      // origin={{
-      //   x: boxX.current + boxSizePx / 2,
-      //   y: boxY.current + boxSizePx / 2,
-      // }}
-      // transform={[
-      //   {
-      //     rotate: boxAngle * degreeToRadFactor,
-      //   },
-      // ]}
-      >
-        <Rect
-          height={boxSizePx}
-          width={boxSizePx}
-          x={boxX}
-          y={boxY}
-          color={'red'}
-        />
+      <Group matrix={boxMatrix}>
+        <Rect height={boxSizePx} width={boxSizePx} x={0} y={0} color={'red'} />
       </Group>
 
       {/* Ground box */}
