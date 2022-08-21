@@ -1,4 +1,8 @@
-import { Canvas, useClockValue } from '@shopify/react-native-skia';
+import {
+  Canvas,
+  useClockValue,
+  useTouchHandler,
+} from '@shopify/react-native-skia';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { StatusBar } from 'react-native';
 import { Box2d } from 'react-native-fast-crypto';
@@ -11,6 +15,7 @@ const VELOCITY_ITERATIONS = 6;
 const POSITION_ITERATIONS = 2;
 
 export const FlappyBirdScreen = () => {
+  const birdRef = useRef<Bird>(null);
   const birdPosition = useMemo(() => {
     return Box2d.b2Vec2(
       Config.widthInMm / 2 - WIDTH / 2,
@@ -43,14 +48,21 @@ export const FlappyBirdScreen = () => {
     };
   }, []);
 
+  const onTouch = useTouchHandler({
+    onStart: () => {
+      birdRef.current?.flyUp();
+    },
+  });
+
   return (
     <Canvas
       style={{
         height: Config.screenHeight,
         width: Config.screenWidth,
       }}
+      onTouch={onTouch}
     >
-      <Bird position={birdPosition} />
+      <Bird ref={birdRef} position={birdPosition} />
     </Canvas>
   );
 };

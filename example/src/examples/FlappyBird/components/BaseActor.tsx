@@ -15,8 +15,6 @@ type Props = {
   body: Box2D.Dynamics.b2Body;
 };
 
-// const degreeToRadFactor = Math.PI / 180;
-
 export const BaseActor: React.FC<Props> = ({
   position,
   width,

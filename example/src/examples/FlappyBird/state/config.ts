@@ -17,6 +17,7 @@ const widthInMm = 8;
 const mmToPxFactor = screenWidth / widthInMm;
 const pxToMmFactor = widthInMm / screenWidth;
 const heightInMm = screenHeight * pxToMmFactor;
+const degreeToRadFactor = Math.PI / 180;
 
 export const Config = {
   widthInMm,
@@ -25,4 +26,5 @@ export const Config = {
   pxToMmFactor,
   screenWidth,
   screenHeight,
+  degreeToRadFactor,
 };
