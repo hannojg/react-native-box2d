@@ -44,9 +44,14 @@ namespace Box2d {
             }
         }
 
+        JSI_PROPERTY_SET(linearVelocity) {
+            getObject()->linearVelocity = *JSIBox2dVec2::fromValue(runtime, value);
+        }
+
         JSI_EXPORT_PROPERTY_SETTERS(JSI_EXPORT_PROP_SET(JSIBox2dBodyDef, position),
                                     JSI_EXPORT_PROP_SET(JSIBox2dBodyDef, type),
                                     JSI_EXPORT_PROP_SET(JSIBox2dBodyDef, angle),
+                                    JSI_EXPORT_PROP_SET(JSIBox2dBodyDef, linearVelocity),
         );
 
         /**

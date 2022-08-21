@@ -14,7 +14,6 @@ export const WIDTH = 1.5;
 // https://github.dev/YieldNull/FlappyBird/blob/master/core/src/com/yieldnull/flappybird/screen/GameScreen.java
 export class Bird extends React.PureComponent<Props> {
   private body: Box2d.Dynamics.b2Body;
-  private unlisteners?: () => void;
 
   constructor(props: Props) {
     super(props);
@@ -31,24 +30,25 @@ export class Bird extends React.PureComponent<Props> {
     const fixtureDef = Box2d.b2FixtureDef();
     fixtureDef.shape = dynamicBox;
     fixtureDef.density = 0.1;
-    fixtureDef.friction = 0;
+    fixtureDef.friction = 1;
     // fixtureDef.isSensor = true;
     this.body.CreateFixture(fixtureDef);
   }
 
   flyUp = () => {
-    // TODO: we just need to call that once on game start?
-    // this.body.SetLinearVelocity(Box2d.b2Vec2(0, 1));
-    // const HOVER_STEP = 0.35;
-    this.body.ApplyForceToCenter(Box2d.b2Vec2(0, -100), true);
+    this.body.SetLinearVelocity(Box2d.b2Vec2(0, -10));
   };
 
+  private unlistener?: () => void;
   componentDidMount(): void {
-    // this.unlisteners = addDrawListener(() => {});
+    // TODO: change rotation
+    this.unlistener = addDrawListener(() => {
+      console.log(this.body.GetLinearVelocity());
+    });
   }
 
   componentWillUnmount(): void {
-    this.unlisteners?.();
+    this.unlistener?.();
     WORLD.DestroyBody(this.body);
   }
 
