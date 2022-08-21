@@ -59,11 +59,30 @@ namespace Box2d {
             return jsi::Value::undefined();
         }
 
+        JSI_HOST_FUNCTION(GetLinearVelocity) {
+            return JSIBox2dVec2::toValue(runtime, getObject()->GetLinearVelocity());
+        }
+
+        JSI_HOST_FUNCTION(SetTransform) {
+            auto position = JSIBox2dVec2::fromValue(runtime, arguments[0]).get();
+            auto angle = arguments[1].asNumber();
+            getObject()->SetTransform(*position, angle);
+            return jsi::Value::undefined();
+        }
+
+//        JSI_HOST_FUNCTION(GetTransform) {
+//            b2Transform transform;
+//            getObject()->GetTransform(&transform);
+//            return JSIBox2dTransform::toValue(runtime, transform);
+//        }
+
         JSI_EXPORT_FUNCTIONS(JSI_EXPORT_FUNC(JSIBox2dBody, GetAngle),
                              JSI_EXPORT_FUNC(JSIBox2dBody, GetPosition),
                              JSI_EXPORT_FUNC(JSIBox2dBody, CreateFixture),
                              JSI_EXPORT_FUNC(JSIBox2dBody, CreateFixture2),
-                             JSI_EXPORT_FUNC(JSIBox2dBody, SetLinearVelocity)
+                             JSI_EXPORT_FUNC(JSIBox2dBody, SetLinearVelocity),
+                             JSI_EXPORT_FUNC(JSIBox2dBody, GetLinearVelocity),
+                             JSI_EXPORT_FUNC(JSIBox2dBody, SetTransform)
         );
 
     };
