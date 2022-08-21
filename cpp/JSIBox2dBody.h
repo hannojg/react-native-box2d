@@ -37,8 +37,16 @@ namespace Box2d {
             if (arguments[0].isObject()) {
                 const auto obj = arguments[0].asObject(runtime);
                 if (obj.isHostObject<JSIBox2dFixtureDef>(runtime)) {
-                    getObject()->CreateFixture(
-                            JSIBox2dFixtureDef::fromValue(runtime, arguments[0]).get());
+                    if (arguments[1].isNumber()) {
+                        getObject()->CreateFixture(
+                                JSIBox2dFixtureDef::fromValue(runtime, arguments[0]).get(),
+                                arguments[1].asNumber()
+                        );
+                    } else {
+                        getObject()->CreateFixture(
+                                JSIBox2dFixtureDef::fromValue(runtime, arguments[0]).get()
+                        );
+                    }
                     return jsi::Value::undefined();
                 }
             }
