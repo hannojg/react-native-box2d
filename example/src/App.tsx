@@ -34,22 +34,22 @@ const boxSizeMm = 1;
 const boxSizePx = Math.ceil(boxSizeMm * mmToPxFactor);
 
 const degreeToRadFactor = Math.PI / 180;
-const boxStartAngle = 45 * degreeToRadFactor;
 
-// TODO: the box hits the floor earlier than visible
-export default function App() {
-  const clock = useClockValue();
+// random int inclusive
+const randomInt = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
-  /**
-   * Important note: the top (y) of thw world is "0", while the bottom is "heightInMm" (e.g. 12)
-   */
-  console.log(`World in meters:\nWidth: ${widthInMm}\nHeight: ${heightInMm}`);
-
-  // binding needed for rendering
+const Box = ({
+  world,
+  registerStepListener,
+}: {
+  world: Box2D.Dynamics.b2World;
+  registerStepListener: (listener: () => unknown) => () => void;
+}) => {
   const boxWorldPos = useValue({
     y: 4,
-    x: widthInMm / 2 - boxSizeMm / 2,
-    angle: boxStartAngle,
+    x: randomInt(boxSizeMm, widthInMm - boxSizeMm),
+    angle: randomInt(0, 180) * degreeToRadFactor,
   });
 
   const boxMatrix = useComputedValue(() => {
@@ -69,25 +69,7 @@ export default function App() {
     return matrix;
   }, [boxWorldPos]);
 
-  const groundBoxHeightMm = 1;
-  // Reproduction from: https://box2d.org/documentation/md__d_1__git_hub_box2d_docs_hello.html
   React.useEffect(() => {
-    const gravityVec = Box2d.b2Vec2(0, 10); // close to earth gravity
-    const world = Box2d.b2World(gravityVec);
-
-    // create ground
-    const groundBodyDef = Box2d.b2BodyDef();
-    groundBodyDef.position = Box2d.b2Vec2(
-      widthInMm / 2,
-      heightInMm - groundBoxHeightMm
-    );
-    const groundBody = world.CreateBody(groundBodyDef);
-    // ground polygon
-    const groundBox = Box2d.b2PolygonShape();
-    // The SetAsBox function takes the half-**width** and half-**height** (extents).
-    groundBox.SetAsBox(widthInMm / 2, groundBoxHeightMm / 2);
-    groundBody.CreateFixture2(groundBox, 0);
-
     // create a dynamic body
     const bodyDef = Box2d.b2BodyDef();
     bodyDef.type = 2; // b2_dynamicBody
@@ -109,14 +91,7 @@ export default function App() {
 
     body.CreateFixture(fixtureDef);
 
-    // Start 🙌
-    const timeStep = 1 / 60;
-    const velocityIterations = 6;
-    const positionIterations = 2;
-
-    const remove = clock.addListener(() => {
-      // simulate
-      world.Step(timeStep, velocityIterations, positionIterations);
+    return registerStepListener(() => {
       // update the binding
       const pos = body.GetPosition();
       boxWorldPos.current = {
@@ -132,16 +107,76 @@ export default function App() {
       //   )}, rotation: ${boxWorldPos.current.angle.toFixed(2)}`
       // );
     });
+  }, [boxWorldPos, registerStepListener, world]);
+
+  return (
+    <Group matrix={boxMatrix}>
+      <Rect height={boxSizePx} width={boxSizePx} x={0} y={0} color={'red'} />
+    </Group>
+  );
+};
+
+// TODO: the box hits the floor earlier than visible
+export default function App() {
+  const clock = useClockValue();
+
+  /**
+   * Important note: the top (y) of thw world is "0", while the bottom is "heightInMm" (e.g. 12)
+   */
+  console.log(`World in meters:\nWidth: ${widthInMm}\nHeight: ${heightInMm}`);
+
+  const groundBoxHeightMm = 1;
+  // Reproduction from: https://box2d.org/documentation/md__d_1__git_hub_box2d_docs_hello.html
+  const world = React.useMemo(() => {
+    const gravityVec = Box2d.b2Vec2(0, 10); // close to earth gravity
+    return Box2d.b2World(gravityVec);
+  }, []);
+
+  const stepListeners = React.useRef<(() => unknown)[]>([]);
+  React.useEffect(() => {
+    // create ground
+    const groundBodyDef = Box2d.b2BodyDef();
+    groundBodyDef.position = Box2d.b2Vec2(
+      widthInMm / 2,
+      heightInMm - groundBoxHeightMm
+    );
+    const groundBody = world.CreateBody(groundBodyDef);
+    // ground polygon
+    const groundBox = Box2d.b2PolygonShape();
+    // The SetAsBox function takes the half-**width** and half-**height** (extents).
+    groundBox.SetAsBox(widthInMm / 2, groundBoxHeightMm / 2);
+    groundBody.CreateFixture2(groundBox, 0);
+
+    // Start 🙌
+    const timeStep = 1 / 60;
+    const velocityIterations = 6;
+    const positionIterations = 2;
+
+    const remove = clock.addListener(() => {
+      // simulate
+      world.Step(timeStep, velocityIterations, positionIterations);
+      // call listeners (NOTE: i think this call happens on the JS thread)
+      stepListeners.current.forEach((listener) => listener());
+    });
     clock.start();
     return remove;
-  }, [boxWorldPos, clock]);
+  }, [clock, stepListeners, world]);
+  const registerStepListener = React.useCallback(
+    (listener: () => unknown) => {
+      stepListeners.current.push(listener);
+      return () => {
+        const index = stepListeners.current.indexOf(listener);
+        if (index > -1) {
+          stepListeners.current.splice(index, 1);
+        }
+      };
+    },
+    [stepListeners]
+  );
 
   return (
     <Canvas style={styles.container}>
-      {/* Dynamic box */}
-      <Group matrix={boxMatrix}>
-        <Rect height={boxSizePx} width={boxSizePx} x={0} y={0} color={'red'} />
-      </Group>
+      <Box world={world} registerStepListener={registerStepListener} />
 
       {/* Ground box */}
       <Rect
