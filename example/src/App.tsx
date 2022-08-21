@@ -145,7 +145,7 @@ export default function App() {
     // ground polygon
     const groundBox = Box2d.b2PolygonShape();
     // The SetAsBox function takes the half-**width** and half-**height** (extents).
-    groundBox.SetAsBox(widthInMm / 2, groundBoxHeightMm / 2);
+    groundBox.SetAsBox(widthInMm, groundBoxHeightMm / 2);
     groundBody.CreateFixture2(groundBox, 0);
 
     // Start 🙌
@@ -183,7 +183,7 @@ export default function App() {
   });
 
   return (
-    <Canvas style={styles.container} onTouch={touchHandler}>
+    <Canvas style={styles.container} onTouch={touchHandler} debug>
       {Array.from({ length: boxCount }).map((_, index) => (
         <Box
           key={index}
