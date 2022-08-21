@@ -10,6 +10,7 @@ import {
   useClockValue,
   useValue,
   useComputedValue,
+  useTouchHandler,
 } from '@shopify/react-native-skia';
 import StaticSafeAreaInsets from 'react-native-static-safe-area-insets';
 
@@ -174,9 +175,22 @@ export default function App() {
     [stepListeners]
   );
 
+  const [boxCount, setBoxCount] = React.useState(0);
+  const touchHandler = useTouchHandler({
+    onStart: () => {
+      setBoxCount((prev) => prev + 1);
+    },
+  });
+
   return (
-    <Canvas style={styles.container}>
-      <Box world={world} registerStepListener={registerStepListener} />
+    <Canvas style={styles.container} onTouch={touchHandler}>
+      {Array.from({ length: boxCount }).map((_, index) => (
+        <Box
+          key={index}
+          world={world}
+          registerStepListener={registerStepListener}
+        />
+      ))}
 
       {/* Ground box */}
       <Rect
