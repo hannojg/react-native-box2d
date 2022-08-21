@@ -30,35 +30,26 @@ export class Bird extends React.PureComponent<Props> {
     // fixture
     const fixtureDef = Box2d.b2FixtureDef();
     fixtureDef.shape = dynamicBox;
-    fixtureDef.density = 0;
+    fixtureDef.density = 0.1;
     fixtureDef.friction = 0;
     // fixtureDef.isSensor = true;
     this.body.CreateFixture(fixtureDef);
   }
 
   flyUp = () => {
-    // console.log(this.body);
-    this.body.SetLinearVelocity(Box2d.b2Vec2(0, -7));
+    // TODO: we just need to call that once on game start?
+    // this.body.SetLinearVelocity(Box2d.b2Vec2(0, 1));
+    // const HOVER_STEP = 0.35;
+    this.body.ApplyForceToCenter(Box2d.b2Vec2(0, -100), true);
   };
 
   componentDidMount(): void {
-    this.unlisteners = addDrawListener(() => {
-      let rotation = this.body.GetAngle();
-      if (this.body.GetLinearVelocity().y < -5) {
-        rotation -= 6;
-      } else {
-        rotation += 10;
-      }
-      // rotation = MathUtils.clamp(rotation, -90, 20);
-
-      const pos = this.body.GetPosition();
-      console.log({ pos, rot: rotation * Config.degreeToRadFactor });
-      this.body.SetTransform(pos, rotation * Config.degreeToRadFactor);
-    });
+    // this.unlisteners = addDrawListener(() => {});
   }
 
   componentWillUnmount(): void {
     this.unlisteners?.();
+    WORLD.DestroyBody(this.body);
   }
 
   render(): React.ReactNode {

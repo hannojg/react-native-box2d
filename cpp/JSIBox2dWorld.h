@@ -39,8 +39,16 @@ namespace Box2d {
             return jsi::Value::undefined();
         }
 
+        JSI_HOST_FUNCTION(DestroyBody) {
+            world->DestroyBody(
+                    JSIBox2dBody::fromValue(runtime, arguments[0])
+            );
+            return jsi::Value::undefined();
+        }
+
         JSI_EXPORT_FUNCTIONS(JSI_EXPORT_FUNC(JSIBox2dWorld, CreateBody),
-                             JSI_EXPORT_FUNC(JSIBox2dWorld, Step))
+                             JSI_EXPORT_FUNC(JSIBox2dWorld, Step),
+                             JSI_EXPORT_FUNC(JSIBox2dWorld, DestroyBody));
 
         JSIBox2dWorld(b2Vec2 *gravity) {
             this->world = new b2World(*gravity);

@@ -76,14 +76,38 @@ namespace Box2d {
 //            return JSIBox2dTransform::toValue(runtime, transform);
 //        }
 
+        JSI_HOST_FUNCTION(ApplyForceToCenter) {
+            auto vector = JSIBox2dVec2::fromValue(runtime, arguments[0]).get();
+            getObject()->ApplyForceToCenter(*vector, arguments[1].getBool());
+            return jsi::Value::undefined();
+        }
+
+        JSI_HOST_FUNCTION(ApplyLinearImpulseToCenter) {
+            auto vector = JSIBox2dVec2::fromValue(runtime, arguments[0]).get();
+            getObject()->ApplyLinearImpulseToCenter(*vector, arguments[1].getBool());
+            return jsi::Value::undefined();
+        }
+
         JSI_EXPORT_FUNCTIONS(JSI_EXPORT_FUNC(JSIBox2dBody, GetAngle),
                              JSI_EXPORT_FUNC(JSIBox2dBody, GetPosition),
                              JSI_EXPORT_FUNC(JSIBox2dBody, CreateFixture),
                              JSI_EXPORT_FUNC(JSIBox2dBody, CreateFixture2),
                              JSI_EXPORT_FUNC(JSIBox2dBody, SetLinearVelocity),
                              JSI_EXPORT_FUNC(JSIBox2dBody, GetLinearVelocity),
-                             JSI_EXPORT_FUNC(JSIBox2dBody, SetTransform)
+                             JSI_EXPORT_FUNC(JSIBox2dBody, SetTransform),
+                             JSI_EXPORT_FUNC(JSIBox2dBody, ApplyForceToCenter),
+                             JSI_EXPORT_FUNC(JSIBox2dBody, ApplyLinearImpulseToCenter),
         );
+
+        /**
+        * Returns the underlying object from a host object of this type
+        */
+        static b2Body* fromValue(jsi::Runtime &runtime,
+                                                 const jsi::Value &obj) {
+            return obj.asObject(runtime)
+                    .asHostObject<JSIBox2dBody>(runtime)
+                    ->getObject();
+        }
 
     };
 }
