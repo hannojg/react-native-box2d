@@ -25,22 +25,30 @@ const screenHeight =
       // only needed bc status bar not translucent!
       (StatusBar.currentHeight ?? 0),
   }) ?? 0;
-const meterPerScreenWidth = 8;
-const mmToPxFactor = screenWidth / meterPerScreenWidth;
-const pxToMmFactor = meterPerScreenWidth / screenWidth;
+const widthInMm = 8;
+const mmToPxFactor = screenWidth / widthInMm;
+const pxToMmFactor = widthInMm / screenWidth;
+const heightInMm = screenHeight * pxToMmFactor;
 
 const boxSizeMm = 1;
-const boxSizePx = boxSizeMm * mmToPxFactor;
+const boxSizePx = Math.ceil(boxSizeMm * mmToPxFactor);
 
 const degreeToRadFactor = Math.PI / 180;
-const boxStartAngle = 25 * degreeToRadFactor;
+const boxStartAngle = 45 * degreeToRadFactor;
 
+// TODO: the box hits the floor earlier than visible
 export default function App() {
   const clock = useClockValue();
 
+  /**
+   * Important note: the top (y) of thw world is "0", while the bottom is "heightInMm" (e.g. 12)
+   */
+  console.log(`World in meters:\nWidth: ${widthInMm}\nHeight: ${heightInMm}`);
+
+  // binding needed for rendering
   const boxWorldPos = useValue({
     y: 4,
-    x: meterPerScreenWidth / 2 - boxSizeMm / 2,
+    x: widthInMm / 2 - boxSizeMm / 2,
     angle: boxStartAngle,
   });
 
@@ -61,28 +69,28 @@ export default function App() {
     return matrix;
   }, [boxWorldPos]);
 
+  const groundBoxHeightMm = 1;
   // Reproduction from: https://box2d.org/documentation/md__d_1__git_hub_box2d_docs_hello.html
   React.useEffect(() => {
-    const b2vec2 = Box2d.b2Vec2(0, 10); // close to earth gravity
-    const world = Box2d.b2World(b2vec2);
+    const gravityVec = Box2d.b2Vec2(0, 10); // close to earth gravity
+    const world = Box2d.b2World(gravityVec);
 
     // create ground
-    const groundBoxHeight = 1;
     const groundBodyDef = Box2d.b2BodyDef();
     groundBodyDef.position = Box2d.b2Vec2(
-      0,
-      screenHeight * pxToMmFactor - groundBoxHeight / 2
+      widthInMm / 2,
+      heightInMm - groundBoxHeightMm
     );
     const groundBody = world.CreateBody(groundBodyDef);
-
     // ground polygon
     const groundBox = Box2d.b2PolygonShape();
-    groundBox.SetAsBox(meterPerScreenWidth / 2, groundBoxHeight / 2);
+    // The SetAsBox function takes the half-**width** and half-**height** (extents).
+    groundBox.SetAsBox(widthInMm / 2, groundBoxHeightMm / 2);
     groundBody.CreateFixture2(groundBox, 0);
 
     // create a dynamic body
     const bodyDef = Box2d.b2BodyDef();
-    bodyDef.type = 2;
+    bodyDef.type = 2; // b2_dynamicBody
     bodyDef.position = Box2d.b2Vec2(
       boxWorldPos.current.x,
       boxWorldPos.current.y
@@ -92,7 +100,7 @@ export default function App() {
     const body = world.CreateBody(bodyDef);
     // attach
     const dynamicBox = Box2d.b2PolygonShape();
-    dynamicBox.SetAsBox(boxSizeMm, boxSizeMm);
+    dynamicBox.SetAsBox(boxSizeMm / 2, boxSizeMm / 2);
     // fixture
     const fixtureDef = Box2d.b2FixtureDef();
     fixtureDef.shape = dynamicBox;
@@ -107,7 +115,9 @@ export default function App() {
     const positionIterations = 2;
 
     const remove = clock.addListener(() => {
+      // simulate
       world.Step(timeStep, velocityIterations, positionIterations);
+      // update the binding
       const pos = body.GetPosition();
       boxWorldPos.current = {
         x: pos.x,
@@ -135,10 +145,10 @@ export default function App() {
 
       {/* Ground box */}
       <Rect
-        height={mmToPxFactor}
+        height={Math.ceil(mmToPxFactor * groundBoxHeightMm)}
         width={screenWidth}
         x={0}
-        y={screenHeight - mmToPxFactor}
+        y={Math.ceil(screenHeight - groundBoxHeightMm * mmToPxFactor)}
         color={'lightblue'}
       />
     </Canvas>
