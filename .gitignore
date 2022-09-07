@@ -151,3 +151,6 @@ lint/tmp/
 # Externals
 libs
 cpp/box2d/
+
+# Example
+*.prefs
