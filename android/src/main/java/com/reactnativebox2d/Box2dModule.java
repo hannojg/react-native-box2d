@@ -1,9 +1,8 @@
-package com.reactnativefastcrypto;
+package com.reactnativebox2d;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.JavaScriptContextHolder;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -11,11 +10,11 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 
-@ReactModule(name = FastCryptoModule.NAME)
-public class FastCryptoModule extends ReactContextBaseJavaModule {
-  public static final String NAME = "FastCrypto";
+@ReactModule(name = Box2dModule.NAME)
+public class Box2dModule extends ReactContextBaseJavaModule {
+  public static final String NAME = "Box2d";
 
-  public FastCryptoModule(ReactApplicationContext reactContext) {
+  public Box2dModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
 
@@ -29,17 +28,17 @@ public class FastCryptoModule extends ReactContextBaseJavaModule {
   public boolean install() {
     try {
       Log.i(NAME, "Loading C++ library...");
-      System.loadLibrary("reactnativefastcrypto");
+      System.loadLibrary("reactnativebox2d");
 
       JavaScriptContextHolder jsContext = getReactApplicationContext().getJavaScriptContextHolder();
 
-      Log.i(NAME, "Installing JSI Bindings for react-native-fast-crypto...");
+      Log.i(NAME, "Installing JSI Bindings for react-native-box2d...");
       nativeInstall(jsContext.get());
-      Log.i(NAME, "Successfully installed JSI Bindings for react-native-fast-crypto!");
+      Log.i(NAME, "Successfully installed JSI Bindings for react-native-box2d!");
 
       return true;
     } catch (Exception exception) {
-      Log.e(NAME, "Failed to install JSI Bindings for react-native-fast-crypto!", exception);
+      Log.e(NAME, "Failed to install JSI Bindings for react-native-box2d!", exception);
       return false;
     }
   }

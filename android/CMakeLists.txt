@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.9.0)
 
-set (PACKAGE_NAME "react-native-fast-crypto")
-set (BUILD_DIR ${CMAKE_SOURCE_DIR}/build)
+set(PACKAGE_NAME "react-native-box2d")
+set(BUILD_DIR ${CMAKE_SOURCE_DIR}/build)
 
 include_directories(
         ../cpp
@@ -11,13 +11,13 @@ include_directories(
 )
 
 if(${REACT_NATIVE_VERSION} LESS 66)
-        set (
+        set(
                 INCLUDE_JSI_CPP
                 "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi/jsi/jsi.cpp"
         )
 endif()
 
-add_library(reactnativefastcrypto  # <-- Library name
+add_library(reactnativebox2d # <-- Library name
         SHARED
         "src/main/cpp/cpp-adapter.cpp"
         "../cpp/JSI Utils/TypedArray.cpp"
@@ -26,13 +26,13 @@ add_library(reactnativefastcrypto  # <-- Library name
 )
 
 set_target_properties(
-        reactnativefastcrypto PROPERTIES
+        reactnativebox2d PROPERTIES
         CXX_STANDARD 17
         CXX_EXTENSIONS OFF
         POSITION_INDEPENDENT_CODE ON
 )
 
-file (GLOB LIBRN_DIR "${PREBUILT_DIR}/${ANDROID_ABI}")
+file(GLOB LIBRN_DIR "${PREBUILT_DIR}/${ANDROID_ABI}")
 
 find_library(
         log-lib
@@ -44,9 +44,10 @@ find_library(
         PATHS ${LIBRN_DIR}
         NO_CMAKE_FIND_ROOT_PATH
 )
+
 if(${REACT_NATIVE_VERSION} LESS 66)
         # JSI lib didn't exist on RN 0.65 and before. Simply omit it.
-        set (JSI_LIB "")
+        set(JSI_LIB "")
 else()
         # RN 0.66 distributes libjsi.so, can be used instead of compiling jsi.cpp manually.
         find_library(
@@ -57,9 +58,9 @@ else()
         )
 endif()
 
-#### region: add box2d
+# ### region: add box2d
 target_include_directories(
-        reactnativefastcrypto
+        reactnativebox2d
         PRIVATE
 
         ../cpp/
@@ -67,16 +68,15 @@ target_include_directories(
         ../cpp/box2d/include/
 )
 
-set (BOX2D_LIB "box2d")
+set(BOX2D_LIB "box2d")
 link_directories(../package/libs/android/${ANDROID_ABI}/)
-set (LIBS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../package/libs/android/${ANDROID_ABI}")
+set(LIBS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../package/libs/android/${ANDROID_ABI}")
 add_library(box2d STATIC IMPORTED)
 set_property(TARGET box2d PROPERTY IMPORTED_LOCATION "${LIBS_PATH}/libbox2d.a")
-### endregion
 
-
+# ## endregion
 target_link_libraries(
-        reactnativefastcrypto
+        reactnativebox2d
         ${log-lib}
         ${JSI_LIB}
         ${REACT_NATIVE_JNI_LIB}

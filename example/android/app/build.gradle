@@ -129,7 +129,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.example.reactnativefastcrypto"
+        applicationId "com.example.reactnativebox2d"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -204,7 +204,7 @@ dependencies {
         implementation jscFlavor
     }
 
-    implementation project(':reactnativefastcrypto')
+    implementation project(':reactnativebox2d')
 }
 
 // Run this once to be able to run the application with BUCK

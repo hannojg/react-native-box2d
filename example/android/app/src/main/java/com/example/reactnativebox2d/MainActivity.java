@@ -1,4 +1,4 @@
-package com.example.reactnativefastcrypto;
+package com.example.reactnativebox2d;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "FastCryptoExample";
+    return "Box2dExample";
   }
 
   @Override
