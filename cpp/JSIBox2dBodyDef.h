@@ -25,7 +25,7 @@ namespace Box2d {
             if(value.isObject() && value.asObject(runtime).isHostObject<JSIBox2dVec2>(runtime)) {
                 getObject()->position = *JSIBox2dVec2::fromValue(runtime, value);
             } else {
-                jsi::detail::throwJSError(runtime, "Parameter was not recognized as b2vec2.");
+                throw jsi::JSError(runtime, "Parameter was not recognized as b2vec2.");
             }
         }
         JSI_PROPERTY_SET(angle) {
@@ -40,7 +40,7 @@ namespace Box2d {
             } else if (typeNum == 2) {
                 getObject()->type = b2_dynamicBody;
             } else {
-                jsi::detail::throwJSError(runtime, "Only type 0 (static), 1 (kinematic), 2 (dynamic) are supported");
+                throw jsi::JSError(runtime, "Only type 0 (static), 1 (kinematic), 2 (dynamic) are supported");
             }
         }
 

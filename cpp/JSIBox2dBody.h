@@ -42,8 +42,7 @@ namespace Box2d {
                 }
             }
 
-            jsi::detail::throwJSError(runtime, "Unsupported shape type");
-            return jsi::Value::undefined();
+            throw jsi::JSError(runtime, "Unsupported shape type");
         }
 
         JSI_HOST_FUNCTION(CreateFixture2) {
