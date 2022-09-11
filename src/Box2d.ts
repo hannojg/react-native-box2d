@@ -1,5 +1,11 @@
 import { NativeModules, Platform } from 'react-native';
-import type { Box2D } from './types';
+import type {
+  b2BodyDef,
+  b2FixtureDef,
+  b2PolygonShape,
+  b2Vec2,
+  b2World,
+} from './types';
 
 // global func declaration for JSI functions
 declare global {
@@ -8,11 +14,11 @@ declare global {
   var Box2dApi:
     | undefined
     | {
-        b2Vec2: (xIn: number, yIn: number) => Box2D.Common.Math.b2Vec2;
-        b2World: (b2Vec2: Box2D.Common.Math.b2Vec2) => Box2D.Dynamics.b2World;
-        b2BodyDef: () => Box2D.Dynamics.b2BodyDef;
-        b2PolygonShape: () => Box2D.Collision.Shapes.b2PolygonShape;
-        b2FixtureDef: () => Box2D.Dynamics.b2FixtureDef;
+        b2Vec2: (xIn: number, yIn: number) => b2Vec2;
+        b2World: (vec: b2Vec2) => b2World;
+        b2BodyDef: () => b2BodyDef;
+        b2PolygonShape: () => b2PolygonShape;
+        b2FixtureDef: () => b2FixtureDef;
       };
 }
 
