@@ -7,12 +7,13 @@ import {
 } from '@shopify/react-native-skia';
 import { Config } from '../state/config';
 import { addDrawListener } from '../state/stage';
+import type { b2Body, b2Vec2 } from 'react-native-box2d';
 
 type Props = {
   width: number;
   height: number;
-  position: Box2D.Common.Math.b2Vec2;
-  body: Box2D.Dynamics.b2Body;
+  position: b2Vec2;
+  body: b2Body;
 };
 
 export const BaseActor: React.FC<Props> = ({

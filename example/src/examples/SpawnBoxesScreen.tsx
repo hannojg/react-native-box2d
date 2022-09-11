@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, Dimensions, StatusBar, Platform } from 'react-native';
-import { Box2d } from 'react-native-box2d';
+import { b2World, Box2d } from 'react-native-box2d';
 import {
   Skia,
   Canvas,
@@ -44,7 +44,7 @@ const Box = ({
   world,
   registerStepListener,
 }: {
-  world: Box2D.Dynamics.b2World;
+  world: b2World;
   registerStepListener: (listener: () => unknown) => () => void;
 }) => {
   const boxWorldPos = useValue({

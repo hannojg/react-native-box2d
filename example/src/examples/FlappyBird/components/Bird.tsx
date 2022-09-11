@@ -1,19 +1,19 @@
 import { Rect } from '@shopify/react-native-skia';
 import React from 'react';
-import { Box2d } from 'react-native-box2d';
+import { b2Body, b2Vec2, Box2d } from 'react-native-box2d';
 import { BaseActor } from './BaseActor';
 import { Config } from '../state/config';
 import { addDrawListener, WORLD } from '../state/stage';
 
 type Props = {
-  position: Box2d.Common.Math.b2Vec2;
+  position: b2Vec2;
 };
 export const HEIGHT = 1;
 export const WIDTH = 1.5;
 
 // https://github.dev/YieldNull/FlappyBird/blob/master/core/src/com/yieldnull/flappybird/screen/GameScreen.java
 export class Bird extends React.PureComponent<Props> {
-  private body: Box2d.Dynamics.b2Body;
+  private body: b2Body;
 
   constructor(props: Props) {
     super(props);
