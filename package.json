@@ -36,13 +36,13 @@
     "c++",
     "fast"
   ],
-  "repository": "https://github.com/margelo/react-native-fast-crypto",
-  "author": "Marc Rousavy <me@mrousavy.com> (https://github.com/mrousavy)",
+  "repository": "https://github.com/hannojg/react-native-box2d",
+  "author": "Hanno Gödecke <hanno.goedecke@gmail.com> (https://github.com/hannojg)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/margelo/react-native-fast-crypto/issues"
+    "url": "https://github.com/hannojg/react-native-box2d/issues"
   },
-  "homepage": "https://github.com/margelo/react-native-fast-crypto#readme",
+  "homepage": "https://github.com/hannojg/react-native-box2d#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
