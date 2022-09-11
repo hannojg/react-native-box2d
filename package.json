@@ -14,6 +14,7 @@
     "ios",
     "cpp",
     "react-native-box2d.podspec",
+    "!externals",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
@@ -24,9 +25,13 @@
   "scripts": {
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "prepare": "bob build",
-    "release": "release-it",
-    "pods": "cd example && pod-install --quiet"
+    "pods": "cd example && pod-install --quiet",
+    "copy-headers": "yarn rimraf cpp/box2d && cp -R externals/box2d/include/box2d cpp/box2d",
+    "build-lib-android": "./scripts/android-build-n-copy-box2d.sh",
+    "build-lib-ios": "./scripts/ios-build-n-copy-box2d.sh",
+    "build-lib": "yarn copy-headers && yarn build-lib-android && yarn build-lib-ios",
+    "prepare": "yarn build-lib && bob build",
+    "release": "release-it"
   },
   "keywords": [
     "react-native",

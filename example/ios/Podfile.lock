@@ -485,7 +485,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 6a05173dc0142abc582bd4edd2d23146b8cc218a
   React-jsinspector: be95ad424ba9f7b817aff22732eb9b1b810a000a
   React-logger: 9a9cd87d4ea681ae929b32ef580638ff1b50fb24
-  react-native-box2d: c8edda50b1adb20c27eed423e9d36a710256356e
+  react-native-box2d: b7f3277f68dad9db6a645c779739a9a51dd9148e
   react-native-safe-area-context: b456e1c40ec86f5593d58b275bd0e9603169daca
   react-native-skia: 860cc2544d03ef15884ed40480a7d7b4cae57b0d
   React-perflogger: 1f554c2b684e2f484f9edcdfdaeedab039fbaca8
