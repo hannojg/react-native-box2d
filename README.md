@@ -17,15 +17,8 @@ Use real world physics to build gestures, animations, games or anything else you
 ### React Native
 
 ```sh
-yarn add react-native-...
+yarn add react-native-box2d
 cd ios && pod install
-```
-
-### Expo
-
-```sh
-expo install react-native-...
-expo prebuild
 ```
 
 ## Usage
