@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <box2d/b2_shape.h>
+#include "box2d/b2_shape.h"
 #include "JSIBox2dShape.h"
 #include "JSIBox2dPolygonShape.h"
 

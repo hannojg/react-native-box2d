@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <box2d/b2_body.h>
+#include "box2d/b2_body.h"
 
 #include "JSIBox2dVec2.h"
 #include "JSIBox2dFixtureDef.h"
@@ -12,7 +12,6 @@
 #include <jsi/jsi.h>
 #include "jsi/JsiWrappingHostObjects.h"
 #include "utils.h"
-#include <android/log.h>
 
 namespace Box2d {
     using namespace facebook;

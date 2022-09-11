@@ -11,13 +11,15 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => "11.0", :tvos => "12.0", :osx => "10.14" }
-  s.source       = { :git => "https://github.com/mrousavy/react-native-fast-crypto.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/hannojg/react-native-box2d.git", :tag => "#{s.version}" }
+
+  s.ios.vendored_frameworks = ['package/libs/ios/libbox2d.xcframework']
 
   # All source files that should be publicly visible
   # Note how this does not include headers, since those can nameclash.
   s.source_files = [
     "ios/**/*.{m,mm}",
-    "cpp/**/*.cpp",
+    "cpp/**/*.{cpp,h}",
     "ios/FastCryptoModule.h"
   ]
   # Any private headers that are not globally unique should be mentioned here.
@@ -27,6 +29,11 @@ Pod::Spec.new do |s|
     'ios/**/*.h',
     'cpp/**/*.h'
   ]
+  
+  s.subspec 'Box2dHeaders' do |ss|
+    ss.header_mappings_dir = 'cpp/box2d'
+    ss.source_files = "cpp/box2d/**/*.{h,cpp}"
+  end
 
   s.dependency "React-Core"
 end

@@ -4,15 +4,13 @@
 
 #pragma once
 
-#include <box2d/b2_world.h>
+#include "box2d/b2_world.h"
 #include "JSIBox2dVec2.h"
 #include "JSIBox2dBodyDef.h"
 #include "JSIBox2dBody.h"
 
 #include <jsi/jsi.h>
 #include "jsi/JsiHostObject.h"
-
-#include <android/log.h>
 
 namespace Box2d {
     using namespace facebook;

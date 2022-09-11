@@ -211,6 +211,15 @@ PODS:
     - glog
   - react-native-fast-crypto (0.1.0):
     - React-Core
+    - react-native-fast-crypto/Box2dHeaders (= 0.1.0)
+  - react-native-fast-crypto/Box2dHeaders (0.1.0):
+    - React-Core
+  - react-native-safe-area-context (4.3.3):
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - ReactCommon/turbomodule/core
   - react-native-skia (0.1.137):
     - React
     - React-callinvoker
@@ -332,6 +341,9 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNScreens (3.16.0):
+    - React-Core
+    - React-RCTImage
   - RNStaticSafeAreaInsets (2.1.2):
     - React
   - Yoga (1.14.0)
@@ -357,6 +369,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-fast-crypto (from `../..`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-skia (from `../node_modules/@shopify/react-native-skia`)"
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -371,6 +384,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
+  - RNScreens (from `../node_modules/react-native-screens`)
   - RNStaticSafeAreaInsets (from `../node_modules/react-native-static-safe-area-insets`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -415,6 +429,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-fast-crypto:
     :path: "../.."
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   react-native-skia:
     :path: "../node_modules/@shopify/react-native-skia"
   React-perflogger:
@@ -443,6 +459,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
+  RNScreens:
+    :path: "../node_modules/react-native-screens"
   RNStaticSafeAreaInsets:
     :path: "../node_modules/react-native-static-safe-area-insets"
   Yoga:
@@ -467,7 +485,8 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 6a05173dc0142abc582bd4edd2d23146b8cc218a
   React-jsinspector: be95ad424ba9f7b817aff22732eb9b1b810a000a
   React-logger: 9a9cd87d4ea681ae929b32ef580638ff1b50fb24
-  react-native-fast-crypto: e65e786f9a74abc5375ff58ca860f3714185edf4
+  react-native-fast-crypto: 8a06e158694a67ada7196171e7ab8177a4131a1c
+  react-native-safe-area-context: b456e1c40ec86f5593d58b275bd0e9603169daca
   react-native-skia: 860cc2544d03ef15884ed40480a7d7b4cae57b0d
   React-perflogger: 1f554c2b684e2f484f9edcdfdaeedab039fbaca8
   React-RCTActionSheet: 610d5a5d71ab4808734782c8bca6a12ec3563672
@@ -482,6 +501,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 4bb657a97aa74568d9ed634c8bd478299bb8a3a6
   ReactCommon: eb059748e842a1a86025ebbd4ac9d99e74492f88
   RNReanimated: 11e6e30bbc49079b7f0c321ac5830e6d113d0224
+  RNScreens: ee31ecdf23fe81e93c74feaa086cf173d758ab58
   RNStaticSafeAreaInsets: bb611be967ba27ced2fbf9aca0f067a786175ea6
   Yoga: c11abbf5809216c91fcd62f5571078b83d9b6720
 
