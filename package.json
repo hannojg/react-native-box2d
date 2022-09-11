@@ -14,6 +14,7 @@
     "ios",
     "cpp",
     "react-native-box2d.podspec",
+    "package",
     "!externals",
     "!lib/typescript/example",
     "!android/build",
