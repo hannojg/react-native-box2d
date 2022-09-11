@@ -1,6 +1,6 @@
 {
-  "name": "react-native-fast-crypto-example",
-  "description": "Example app for react-native-fast-crypto",
+  "name": "react-native-box2d-example",
+  "description": "Example app for react-native-box2d",
   "version": "0.0.1",
   "private": true,
   "scripts": {

@@ -30,8 +30,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "FastCryptoExample.app"
-               BlueprintName = "FastCryptoExample"
-               ReferencedContainer = "container:FastCryptoExample.xcodeproj">
+               BlueprintName = "Box2dExample"
+               ReferencedContainer = "container:Box2DExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,10 +46,12 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "FastCryptoExample.app"
-            BlueprintName = "FastCryptoExample"
-            ReferencedContainer = "container:FastCryptoExample.xcodeproj">
+            BlueprintName = "Box2dExample"
+            ReferencedContainer = "container:Box2DExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <Testables>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -67,8 +69,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "FastCryptoExample.app"
-            BlueprintName = "FastCryptoExample"
-            ReferencedContainer = "container:FastCryptoExample.xcodeproj">
+            BlueprintName = "Box2dExample"
+            ReferencedContainer = "container:Box2DExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -84,8 +86,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "FastCryptoExample.app"
-            BlueprintName = "FastCryptoExample"
-            ReferencedContainer = "container:FastCryptoExample.xcodeproj">
+            BlueprintName = "Box2dExample"
+            ReferencedContainer = "container:Box2DExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

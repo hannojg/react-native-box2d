@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/hannogodecke/Documents/GitHub/react-native-box2d/example/ios/Box2dExample.xcodeproj">
+      location = "group:Box2DExample.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:FastCryptoExample.xcodeproj">
+      location = "group:Box2dExample.xcodeproj">
    </FileRef>
 </Workspace>

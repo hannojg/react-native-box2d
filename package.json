@@ -1,7 +1,7 @@
 {
-  "name": "react-native-fast-crypto",
+  "name": "react-native-box2d",
   "version": "0.1.0",
-  "description": "A fast implementation of Node's `crypto` module written in C/C++ JSI",
+  "description": "A react-native JSI library for box2d (fast)",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "react-native-fast-crypto.podspec",
+    "react-native-box2d.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",

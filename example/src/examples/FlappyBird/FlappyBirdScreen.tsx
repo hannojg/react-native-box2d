@@ -5,7 +5,7 @@ import {
 } from '@shopify/react-native-skia';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { StatusBar } from 'react-native';
-import { Box2d } from 'react-native-fast-crypto';
+import { Box2d } from 'react-native-box2d';
 import { WIDTH, HEIGHT, Bird } from './components/Bird';
 import { Config } from './state/config';
 import { getDrawListeners, WORLD } from './state/stage';

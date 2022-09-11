@@ -1,13 +1,13 @@
-#import "FastCryptoModule.h"
+#import "Box2dModule.h"
 
 #import <React/RCTBridge+Private.h>
 #import <React/RCTUtils.h>
 #include <jsi/jsi.h>
 #include "JSIBox2dApi.h"
 
-@implementation FastCryptoModule
+@implementation Box2dModule
 
-RCT_EXPORT_MODULE(FastCrypto)
+RCT_EXPORT_MODULE(Box2d)
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(install)
 {

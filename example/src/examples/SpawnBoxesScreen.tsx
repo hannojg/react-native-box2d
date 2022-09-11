@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, Dimensions, StatusBar, Platform } from 'react-native';
-import { Box2d } from 'react-native-fast-crypto';
+import { Box2d } from 'react-native-box2d';
 import {
   Skia,
   Canvas,

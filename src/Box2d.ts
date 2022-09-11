@@ -17,13 +17,13 @@ declare global {
 
 // Check if the constructor exists. If not, try installing the JSI bindings.
 if (global.Box2dApi == null) {
-  // Get the native FastCrypto ReactModule
-  const FastCryptoModule = NativeModules.FastCrypto;
-  if (FastCryptoModule == null) {
+  // Get the native Box2d ReactModule
+  const Box2dModule = NativeModules.Box2d;
+  if (Box2dModule == null) {
     let message =
-      'Failed to install react-native-fast-crypto: The native `FastCrypto` Module could not be found.';
+      'Failed to install react-native-box2d: The native `Box2d` Module could not be found.';
     message +=
-      '\n* Make sure react-native-fast-crypto is correctly autolinked (run `npx react-native config` to verify)';
+      '\n* Make sure react-native-box2d is correctly autolinked (run `npx react-native config` to verify)';
     if (Platform.OS === 'ios' || Platform.OS === 'macos') {
       message += '\n* Make sure you ran `pod install` in the ios/ directory.';
     }
@@ -37,7 +37,7 @@ if (global.Box2dApi == null) {
       if (ExpoConstants.appOwnership === 'expo') {
         // We're running Expo Go
         throw new Error(
-          'react-native-fast-crypto is not supported in Expo Go! Use EAS (`expo prebuild`) or eject to a bare workflow instead.'
+          'react-native-box2d is not supported in Expo Go! Use EAS (`expo prebuild`) or eject to a bare workflow instead.'
         );
       } else {
         // We're running Expo bare / standalone
@@ -50,23 +50,23 @@ if (global.Box2dApi == null) {
   }
 
   // Check if we are running on-device (JSI)
-  if (global.nativeCallSyncHook == null || FastCryptoModule.install == null) {
+  if (global.nativeCallSyncHook == null || Box2dModule.install == null) {
     throw new Error(
-      'Failed to install react-native-fast-crypto: React Native is not running on-device. FastCrypto can only be used when synchronous method invocations (JSI) are possible. If you are using a remote debugger (e.g. Chrome), switch to an on-device debugger (e.g. Flipper) instead.'
+      'Failed to install react-native-box2d: React Native is not running on-device. Box2d can only be used when synchronous method invocations (JSI) are possible. If you are using a remote debugger (e.g. Chrome), switch to an on-device debugger (e.g. Flipper) instead.'
     );
   }
 
   // Call the synchronous blocking install() function
-  const result = FastCryptoModule.install();
+  const result = Box2dModule.install();
   if (result !== true)
     throw new Error(
-      `Failed to install react-native-fast-crypto: The native FastCrypto Module could not be installed! Looks like something went wrong when installing JSI bindings: ${result}`
+      `Failed to install react-native-box2d: The native Box2d Module could not be installed! Looks like something went wrong when installing JSI bindings: ${result}`
     );
 
   // Check again if the constructor now exists. If not, throw an error.
   if (global.Box2dApi == null)
     throw new Error(
-      'Failed to install react-native-fast-crypto, the native initializer function does not exist. Are you trying to use FastCrypto from different JS Runtimes?'
+      'Failed to install react-native-box2d, the native initializer function does not exist. Are you trying to use Box2d from different JS Runtimes?'
     );
 }
 

@@ -1,6 +1,6 @@
 import { Rect } from '@shopify/react-native-skia';
 import React from 'react';
-import { Box2d } from 'react-native-fast-crypto';
+import { Box2d } from 'react-native-box2d';
 import { BaseActor } from './BaseActor';
 import { Config } from '../state/config';
 import { addDrawListener, WORLD } from '../state/stage';

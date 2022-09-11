@@ -1,4 +1,4 @@
-import { Box2d } from 'react-native-fast-crypto';
+import { Box2d } from 'react-native-box2d';
 
 export const WORLD = Box2d.b2World(Box2d.b2Vec2(0, 20));
 
