@@ -18,6 +18,8 @@
     "!externals",
     "!lib/typescript/example",
     "!android/build",
+    "!android/.cxx",
+    "!android/.gradle",
     "!ios/build",
     "!**/__tests__",
     "!**/__fixtures__",
