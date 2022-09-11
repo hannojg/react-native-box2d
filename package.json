@@ -33,7 +33,8 @@
     "build-lib-android": "./scripts/android-build-n-copy-box2d.sh",
     "build-lib-ios": "./scripts/ios-build-n-copy-box2d.sh",
     "build-lib": "yarn copy-headers && yarn build-lib-android && yarn build-lib-ios",
-    "prepare": "yarn build-lib && bob build",
+    "build-js": "bob build && cp src/types.d.ts lib/typescript/types.d.ts",
+    "prepare": "yarn build-lib && yarn build-js",
     "release": "release-it"
   },
   "keywords": [

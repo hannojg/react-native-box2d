@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import type { Box2D } from './types';
 
 // global func declaration for JSI functions
 declare global {
