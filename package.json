@@ -1,6 +1,6 @@
 {
   "name": "react-native-box2d",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A react-native JSI library for box2d (fast)",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
