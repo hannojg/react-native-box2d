@@ -35,6 +35,15 @@ export interface b2PolygonShape extends b2Shape {
   SetAsBox(hx: number, hy: number): void;
 }
 
+export interface b2CircleShape extends b2Shape {
+  /**
+   * Set the radius of the circle.
+   * @param r Radius of the circle.
+   * @return Circle shape.
+   **/
+  SetRadius(r: number): void;
+}
+
 export interface b2FixtureDef {
   /**
    * The density, usually in kg/m^2.

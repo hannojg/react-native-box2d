@@ -7,6 +7,7 @@
 #include "box2d/b2_shape.h"
 #include "JSIBox2dShape.h"
 #include "JSIBox2dPolygonShape.h"
+#include "JSIBox2dCircleShape.h"
 
 namespace Box2d {
     class Utils {
@@ -16,6 +17,9 @@ namespace Box2d {
                 auto obj = value.asObject(runtime);
                 if (obj.isHostObject<JSIBox2dPolygonShape>(runtime)) {
                     return JSIBox2dPolygonShape::fromValue(runtime, value).get();
+                }
+                if (obj.isHostObject<JSIBox2dCircleShape>(runtime)) {
+                    return JSIBox2dCircleShape::fromValue(runtime, value).get();
                 }
             }
             return nullptr;

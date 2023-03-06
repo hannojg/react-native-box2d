@@ -10,6 +10,7 @@
 #include "JSIBox2dWorld.h"
 #include "JSIBox2dBodyDef.h"
 #include "JSIBox2dPolygonShape.h"
+#include "JSIBox2dCircleShape.h"
 #include "JSIBox2dFixtureDef.h"
 
 namespace Box2d {
@@ -22,6 +23,7 @@ namespace Box2d {
             installFunction("b2World", JSIBox2dWorld::createCtor());
             installFunction("b2BodyDef", JSIBox2dBodyDef::createCtor());
             installFunction("b2PolygonShape", JSIBox2dPolygonShape::createCtor());
+            installFunction("b2CircleShape", JSIBox2dCircleShape::createCtor());
             installFunction("b2FixtureDef", JSIBox2dFixtureDef::createCtor());
         }
     };
