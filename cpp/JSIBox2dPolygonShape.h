@@ -20,7 +20,21 @@ namespace Box2d {
             return jsi::Value::undefined();
         }
 
-        JSI_EXPORT_FUNCTIONS(JSI_EXPORT_FUNC(JSIBox2dPolygonShape, SetAsBox))
+        JSI_HOST_FUNCTION(Set) {
+            auto array = arguments[0].asObject(runtime).asArray(runtime);
+            auto n = static_cast<int32>(array.length(runtime));
+            b2Vec2 points[n];
+            for (int32 i = 0; i < n; ++i) {
+              auto point = JSIBox2dVec2::fromValue(runtime, array.getValueAtIndex(runtime, i));
+              points[i].x = point->x;
+              points[i].y = point->y;
+            }
+            getObject()->Set(points, n);
+            return jsi::Value::undefined();
+        }
+
+        JSI_EXPORT_FUNCTIONS(JSI_EXPORT_FUNC(JSIBox2dPolygonShape, SetAsBox),
+                             JSI_EXPORT_FUNC(JSIBox2dPolygonShape, Set))
 
         /**
          * Constructor
