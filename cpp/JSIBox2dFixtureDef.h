@@ -27,10 +27,15 @@ namespace Box2d {
             getObject()->friction = value.asNumber();
         }
 
+        JSI_PROPERTY_SET(restitution) {
+            getObject()->restitution = value.asNumber();
+        }
+
         JSI_EXPORT_PROPERTY_SETTERS(
                 JSI_EXPORT_PROP_SET(JSIBox2dFixtureDef, shape),
                 JSI_EXPORT_PROP_SET(JSIBox2dFixtureDef, density),
-                JSI_EXPORT_PROP_SET(JSIBox2dFixtureDef, friction))
+                JSI_EXPORT_PROP_SET(JSIBox2dFixtureDef, friction),
+                JSI_EXPORT_PROP_SET(JSIBox2dFixtureDef, restitution))
 
         /**
          * Constructor

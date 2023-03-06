@@ -47,6 +47,11 @@ export interface b2FixtureDef {
   friction: number;
 
   /**
+   * The restitution (elasticity) usually in the range [0,1].
+   **/
+  restitution: number;
+
+  /**
    * The shape, this must be set. The shape will be cloned, so you can create the shape on the stack.
    **/
   shape: b2Shape;
