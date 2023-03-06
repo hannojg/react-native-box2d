@@ -1,6 +1,7 @@
 import { NativeModules, Platform } from 'react-native';
 import type {
   b2BodyDef,
+  b2CircleShape,
   b2FixtureDef,
   b2PolygonShape,
   b2Vec2,
@@ -18,6 +19,7 @@ declare global {
         b2World: (vec: b2Vec2) => b2World;
         b2BodyDef: () => b2BodyDef;
         b2PolygonShape: () => b2PolygonShape;
+        b2CircleShape: () => b2CircleShape;
         b2FixtureDef: () => b2FixtureDef;
       };
 }
