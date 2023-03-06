@@ -109,6 +109,12 @@ export interface b2Body {
   SetLinearVelocity(v: b2Vec2): void;
 
   /**
+   * Set the linear damping of the body.
+   * @param linearDamping New linear damping of the body.
+   **/
+  SetLinearDamping(linearDamping: number): void;
+
+  /**
    *
    * Set the position of the body's origin and rotation.
    * Manipulating a body's transform may cause non-physical behavior.
