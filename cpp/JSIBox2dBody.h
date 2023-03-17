@@ -61,6 +61,12 @@ namespace Box2d {
             return JSIBox2dVec2::toValue(runtime, getObject()->GetLinearVelocity());
         }
 
+        JSI_HOST_FUNCTION(SetLinearDamping) {
+            auto linearDamping = arguments[0].asNumber();
+            getObject()->SetLinearDamping(linearDamping);
+            return jsi::Value::undefined();
+        }
+
         JSI_HOST_FUNCTION(SetTransform) {
             auto position = JSIBox2dVec2::fromValue(runtime, arguments[0]).get();
             auto angle = arguments[1].asNumber();
@@ -92,6 +98,7 @@ namespace Box2d {
                              JSI_EXPORT_FUNC(JSIBox2dBody, CreateFixture2),
                              JSI_EXPORT_FUNC(JSIBox2dBody, SetLinearVelocity),
                              JSI_EXPORT_FUNC(JSIBox2dBody, GetLinearVelocity),
+                             JSI_EXPORT_FUNC(JSIBox2dBody, SetLinearDamping),
                              JSI_EXPORT_FUNC(JSIBox2dBody, SetTransform),
                              JSI_EXPORT_FUNC(JSIBox2dBody, ApplyForceToCenter),
                              JSI_EXPORT_FUNC(JSIBox2dBody, ApplyLinearImpulseToCenter),
