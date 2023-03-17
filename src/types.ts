@@ -33,6 +33,13 @@ export interface b2PolygonShape extends b2Shape {
    * @return Box polygon shape.
    **/
   SetAsBox(hx: number, hy: number): void;
+
+  /**
+   * Create a convex hull from the given array of local points. The count must be in the range [3, b2_maxPolygonVertices].
+   * @param points The array of local points.
+   * @return Polygon shape.
+   **/
+  Set(points: b2Vec2[]): void;
 }
 
 export interface b2CircleShape extends b2Shape {
